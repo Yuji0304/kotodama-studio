@@ -1,0 +1,227 @@
+---
+interface Props {
+  /** true のとき: ページ先頭が黒ヒーローなので、スクロールがヒーロー末尾を超えるまで透明を維持 */
+  heroFull?: boolean;
+}
+const { heroFull = false } = Astro.props;
+
+const navLinks = [
+  { href: '/',        label: 'トップ' },
+  { href: '/services', label: 'サービス' },
+  { href: '/contact',  label: 'お問い合わせ' },
+];
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  class="header"
+  id="header"
+  data-hero-full={String(heroFull)}
+>
+  <div class="container header__inner">
+    <a href="/" class="header__logo" aria-label="言霊.studio トップへ">
+      <img
+        src="/logo-hero.png"
+        alt="言霊.studio"
+        style="mix-blend-mode: screen; display: block; height: 44px; width: auto;"
+      />
+    </a>
+
+    <nav class="header__nav" aria-label="メインナビゲーション">
+      <ul class="nav-list">
+        {navLinks.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class:list={['nav-link', { 'nav-link--active': currentPath === href }]}
+            >{label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href="/contact" class="header__cta btn btn-primary">無料相談</a>
+
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav>
+      <ul class="mobile-nav-list">
+        {navLinks.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class:list={['mobile-nav-link', { 'mobile-nav-link--active': currentPath === href }]}
+            >{label}</a>
+          </li>
+        ))}
+        <li>
+          <a href="/contact" class="btn btn-primary"
+             style="display:block;text-align:center;margin-top:1rem;">
+            無料相談
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    transition: background 0.4s ease, border-bottom 0.4s ease;
+    border-bottom: 1px solid transparent;
+  }
+
+  /* 透明状態（インディゴヒーロー上） */
+  .header:not(.scrolled) {
+    background: transparent;
+  }
+
+  /* スクロール後 */
+  .header.scrolled {
+    background: rgba(11, 22, 40, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom-color: rgba(255,255,255,0.09);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    gap: 2rem;
+  }
+
+  .header__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .header__nav { flex: 1; }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.65);
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 2px;
+    letter-spacing: 0.03em;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gradient-accent);
+    transition: width 0.28s ease;
+  }
+  .nav-link:hover,
+  .nav-link--active            { color: #fff; }
+  .nav-link:hover::after,
+  .nav-link--active::after     { width: 100%; }
+
+  .header__cta {
+    margin-left: auto;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.83rem;
+  }
+
+  /* ハンバーガー */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: auto;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px; height: 1.5px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* モバイルメニュー */
+  .mobile-menu {
+    display: none;
+    background: rgba(11,22,40,0.97);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+  }
+  .mobile-menu.open { max-height: 400px; }
+
+  .mobile-nav-list {
+    list-style: none;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .mobile-nav-link {
+    display: block;
+    padding: 0.75rem 0;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: rgba(200,220,255,0.65);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    transition: color 0.2s;
+  }
+  .mobile-nav-link:hover,
+  .mobile-nav-link--active { color: #fff; }
+
+  @media (max-width: 768px) {
+    .header__nav, .header__cta { display: none; }
+    .hamburger  { display: flex; }
+    .mobile-menu { display: block; }
+  }
+</style>
+
+<script>
+  const header    = document.getElementById('header') as HTMLElement | null;
+  const hamburger = document.getElementById('hamburger') as HTMLButtonElement | null;
+  const mobileMenu = document.getElementById('mobile-menu') as HTMLElement | null;
+
+  const heroFull = header?.dataset.heroFull === 'true';
+
+  function updateHeader() {
+    if (!header) return;
+    // heroFull ページでは 画面高さの 85% を超えたら bg を付ける
+    const threshold = heroFull ? window.innerHeight * 0.85 : 20;
+    header.classList.toggle('scrolled', window.scrollY > threshold);
+  }
+
+  updateHeader(); // 初期化
+  window.addEventListener('scroll', updateHeader, { passive: true });
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    mobileMenu?.classList.toggle('open');
+    mobileMenu?.setAttribute('aria-hidden', String(!isOpen));
+  });
+</script>

@@ -1,0 +1,742 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<Layout
+  title="サービス | 言霊.studio"
+  description="言霊.studioのサービス一覧。ポッドキャスト運用（企画・制作・配信・分析）、デジタルオーディオ広告（Spotify・ポッドキャスト内広告）、ブランディング伴走支援をワンストップで提供します。"
+>
+  <Header />
+
+  <main class="services-main">
+
+    <!-- ======================================
+         ページヒーロー
+    ====================================== -->
+    <section class="page-hero washi">
+      <div class="page-hero__gradient" aria-hidden="true"></div>
+      <div class="page-hero__rings" aria-hidden="true">
+        <span class="deco-ring" style="width:600px;height:600px;top:-100px;right:-150px;position:absolute;"></span>
+      </div>
+      <div class="container page-hero__content">
+        <span class="section-label fade-up fade-up-delay-1">Services</span>
+        <h1 class="page-hero__title fade-up fade-up-delay-2">サービス一覧</h1>
+        <div class="page-hero__divider fade-up fade-up-delay-2" aria-hidden="true"></div>
+        <p class="page-hero__desc fade-up fade-up-delay-3">
+          音声メディアに特化した3つのサービスで、<br/>
+          企業・行政のブランドコミュニケーションを支援します。
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================
+         [ 01 ] PODCAST — ポッドキャスト運用
+    ====================================== -->
+    <section class="section service-detail" id="podcast">
+      <div class="container">
+        <div class="service-detail__header" data-anim>
+          <div class="service-detail__badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="10" r="4" stroke="url(#pdg1)" stroke-width="1.5"/>
+              <path d="M6 18c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="url(#pdg1)" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M3 12c0 5 4 9 9 9s9-4 9-9" stroke="url(#pdg1)" stroke-width="1.3" stroke-linecap="round"/>
+              <defs>
+                <linearGradient id="pdg1" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#aad4f5"/>
+                  <stop offset="1" stop-color="#4a8ec8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            [ 01 ] PODCAST
+          </div>
+          <h2 class="service-detail__title">ポッドキャスト運用</h2>
+          <p class="service-detail__subtitle">Podcast Production & Management</p>
+          <p class="service-detail__desc">
+            番組の企画設計からコンテンツ制作、各プラットフォームへの配信、リスナー分析・改善まで、
+            ポッドキャスト運用に必要なすべての工程をワンストップで代行します。
+            経営者・専門家の声を最大限に活かし、ブランドの「声」を構築します。
+          </p>
+        </div>
+
+        <div class="features-grid">
+          {[
+            {
+              title: '番組企画・コンセプト設計',
+              desc: 'ターゲットリスナーの設定から、番組フォーマット・タイトル・シリーズ構成まで、戦略的な番組設計を行います。',
+              icon: 'M12 3C8.13 3 5 6.13 5 10v1c0 3.87 3.13 7 7 7s7-3.13 7-7v-1c0-3.87-3.13-7-7-7z M19 11v1a7 7 0 01-14 0v-1 M12 18v3 M9 21h6',
+            },
+            {
+              title: '収録・編集・音楽制作',
+              desc: 'プロ品質の音声編集、ノイズ除去、BGM・SE制作まで対応。リモート収録のサポートも行います。',
+              icon: 'M9 19V6l12-3v13 M6 19a3 3 0 100-6 3 3 0 000 6z M18 16a3 3 0 100-6 3 3 0 000 6z',
+            },
+            {
+              title: 'マルチプラットフォーム配信',
+              desc: 'Spotify、Apple Podcasts、Amazon Music など主要プラットフォームへ一括配信。SEO最適化も対応します。',
+              icon: 'M18 5a2 2 0 100-4 2 2 0 000 4z M6 12a2 2 0 100-4 2 2 0 000 4z M18 19a2 2 0 100-4 2 2 0 000 4z M8.59 13.51l6.83 3.98 M15.41 6.51l-6.82 3.98',
+            },
+            {
+              title: 'リスナー分析・改善提案',
+              desc: '月次の聴取データレポートと改善提案を提供。エンゲージメント向上に向けた継続的なPDCAを回します。',
+              icon: 'M4 20h16 M4 20V10l8-6 8 6v10 M9 14h6v6H9z',
+            },
+            {
+              title: 'SNS・テキスト展開',
+              desc: 'エピソードの要約記事、X・Instagramへの投稿文生成など、音声コンテンツの二次展開もサポートします。',
+              icon: 'M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z',
+            },
+            {
+              title: 'ゲスト・コラボ企画',
+              desc: '業界著名人や関連企業とのコラボ企画をコーディネート。番組のリーチ拡大と信頼性向上を実現します。',
+              icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+            },
+          ].map(({ title, desc, icon }) => (
+            <div class="feature-item" data-anim>
+              <div class="feature-item__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d={icon} stroke="url(#fig1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <defs>
+                    <linearGradient id="fig1" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#aad4f5"/>
+                      <stop offset="1" stop-color="#4a8ec8"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <h3>{title}</h3>
+              <p>{desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- フロー -->
+        <div class="flow-section" data-anim>
+          <h3 class="flow-title">サービスの流れ</h3>
+          <div class="flow-steps">
+            {[
+              { step: '一', label: 'ヒアリング',  desc: '目的・ターゲット・予算をお聞きします' },
+              { step: '二', label: '企画設計',    desc: '番組コンセプトと配信計画を策定します' },
+              { step: '三', label: '制作開始',    desc: '収録・編集・サムネイル制作を実施します' },
+              { step: '四', label: '配信・運用',  desc: '各プラットフォームへ配信し、継続的に改善します' },
+            ].map(({ step, label, desc }) => (
+              <div class="flow-step">
+                <div class="flow-step__num">{step}</div>
+                <div class="flow-step__body">
+                  <h4>{label}</h4>
+                  <p>{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================
+         [ 02 ] AUDIO ADS — デジタルオーディオ広告
+    ====================================== -->
+    <section class="section service-detail service-detail--alt" id="audio-ads">
+      <div class="container">
+        <div class="service-detail__header" data-anim>
+          <div class="service-detail__badge service-detail__badge--gold">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="3" y="7" width="18" height="12" rx="2" stroke="url(#adg1)" stroke-width="1.5"/>
+              <path d="M3 11h18" stroke="url(#adg1)" stroke-width="1.3"/>
+              <circle cx="8" cy="15" r="1.5" fill="url(#adg1)"/>
+              <path d="M13 15h5" stroke="url(#adg1)" stroke-width="1.3" stroke-linecap="round"/>
+              <defs>
+                <linearGradient id="adg1" x1="3" y1="7" x2="21" y2="19" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#c8a96e"/>
+                  <stop offset="1" stop-color="#e8c98a"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            [ 02 ] AUDIO ADS
+          </div>
+          <h2 class="service-detail__title">デジタルオーディオ広告</h2>
+          <p class="service-detail__subtitle">Digital Audio Advertising</p>
+          <p class="service-detail__desc">
+            Spotify・ポッドキャストなど主要音声プラットフォームへのオーディオ広告出稿を一括で代行。
+            クリエイティブ制作から効果測定まで、広告運用のすべてをサポートします。
+          </p>
+        </div>
+
+        <!-- プラットフォーム -->
+        <div class="platforms-grid" data-anim>
+          {[
+            {
+              name: 'Spotify Ads',
+              desc: '日本最大級の音楽ストリーミングサービス。年齢・性別・音楽趣向によるターゲティング広告を配信します。',
+              tags: ['Audio Ad', 'Podcast Ad', 'Video Takeover'],
+            },
+            {
+              name: 'Podcast内広告',
+              desc: '番組ホストが直接読み上げるホストリード広告で高い信頼性を獲得。ニッチジャンルへの出稿も対応します。',
+              tags: ['ホストリード', 'Pre-roll / Mid-roll', 'スポンサーシップ'],
+            },
+          ].map(({ name, desc, tags }) => (
+            <div class="platform-card">
+              <div class="platform-card__name">{name}</div>
+              <p class="platform-card__desc">{desc}</p>
+              <ul class="platform-card__tags">
+                {tags.map(tag => <li>{tag}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div class="features-grid" style="margin-top: 3rem;">
+          {[
+            {
+              title: '戦略設計・メディアプランニング',
+              desc: '目的・KPI・ターゲットに合わせて最適なプラットフォームと配信設計を提案します。',
+              icon: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+            },
+            {
+              title: 'オーディオクリエイティブ制作',
+              desc: 'プロのナレーター・音楽制作チームによる高品質な音声広告クリエイティブを制作します。',
+              icon: 'M9 19V6l12-3v13 M6 19a3 3 0 100-6 3 3 0 000 6z M18 16a3 3 0 100-6 3 3 0 000 6z',
+            },
+            {
+              title: '効果測定・レポーティング',
+              desc: 'リーチ数・インプレッション・ブランドリフト調査など、広告効果を多角的に測定・報告します。',
+              icon: 'M4 20h16 M4 20V10l8-6 8 6v10',
+            },
+            {
+              title: '精密なターゲティング',
+              desc: '年齢・性別・職業・趣味嗜好・地域など細かいセグメントで、届けたい相手に的確にアプローチします。',
+              icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 7a4 4 0 100-8 4 4 0 000 8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75',
+            },
+          ].map(({ title, desc, icon }) => (
+            <div class="feature-item" data-anim>
+              <div class="feature-item__icon feature-item__icon--gold">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d={icon} stroke="url(#fig2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <defs>
+                    <linearGradient id="fig2" x1="1" y1="1" x2="23" y2="23" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#c8a96e"/>
+                      <stop offset="1" stop-color="#e8c98a"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <h3>{title}</h3>
+              <p>{desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- フロー -->
+        <div class="flow-section" data-anim>
+          <h3 class="flow-title">サービスの流れ</h3>
+          <div class="flow-steps">
+            {[
+              { step: '一', label: 'ゴール設定',    desc: 'KPI・ターゲット・予算を明確にします' },
+              { step: '二', label: 'プランニング',  desc: 'プラットフォームと配信スケジュールを設計します' },
+              { step: '三', label: 'クリエイティブ制作', desc: '音声広告素材を制作・品質確認します' },
+              { step: '四', label: '配信・最適化',  desc: '配信を開始し、PDCAで継続改善します' },
+            ].map(({ step, label, desc }) => (
+              <div class="flow-step">
+                <div class="flow-step__num flow-step__num--gold">{step}</div>
+                <div class="flow-step__body">
+                  <h4>{label}</h4>
+                  <p>{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================
+         [ 03 ] BRANDING — ブランディング伴走支援
+    ====================================== -->
+    <section class="section service-detail" id="branding">
+      <div class="container">
+        <div class="service-detail__header" data-anim>
+          <div class="service-detail__badge service-detail__badge--teal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3L4 7v6c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V7L12 3z" stroke="url(#brg1)" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M9 12l2.5 2.5 4.5-4.5" stroke="url(#brg1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="brg1" x1="4" y1="3" x2="20" y2="21" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#79d4c8"/>
+                  <stop offset="1" stop-color="#4ab8a8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            [ 03 ] BRANDING
+          </div>
+          <h2 class="service-detail__title">ブランディング伴走支援</h2>
+          <p class="service-detail__subtitle">Brand Partnership Support</p>
+          <p class="service-detail__desc">
+            音声コンテンツを軸に、SNS運用・内製化支援まで包括的にサポート。
+            単発の制作にとどまらず、ブランドの声を継続的に育てるパートナーとして長期的に伴走します。
+          </p>
+        </div>
+
+        <div class="features-grid">
+          {[
+            {
+              title: 'ブランド戦略・コンテンツ設計',
+              desc: 'ターゲット・トーン・チャネルを整理し、音声を中心とした一貫したブランドコミュニケーション戦略を策定します。',
+              icon: 'M9 19V6l12-3v13 M6 19a3 3 0 100-6 3 3 0 000 6z M18 16a3 3 0 100-6 3 3 0 000 6z',
+            },
+            {
+              title: 'SNS運用支援（X・Instagram等）',
+              desc: 'ポッドキャストや音声コンテンツと連動したSNS投稿設計・運用代行。フォロワーとの継続的なエンゲージメントを構築します。',
+              icon: 'M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z',
+            },
+            {
+              title: '社内内製化サポート',
+              desc: '将来的な自社運用を見据え、収録フロー・編集ノウハウ・ブランドガイドラインを整備。担当者育成も支援します。',
+              icon: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 7a4 4 0 100-8 4 4 0 000 8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75',
+            },
+            {
+              title: 'ブランドガイドライン策定',
+              desc: 'ロゴ・カラー・トーンオブボイスなどを体系化したブランドガイドラインを作成。一貫したブランド表現を実現します。',
+              icon: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+            },
+            {
+              title: '定期戦略レビュー',
+              desc: '月次・四半期ごとに数値・ブランド認知・競合動向を振り返り、次フェーズの施策を一緒に設計します。',
+              icon: 'M4 20h16 M4 20V10l8-6 8 6v10',
+            },
+          ].map(({ title, desc, icon }) => (
+            <div class="feature-item" data-anim>
+              <div class="feature-item__icon feature-item__icon--teal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d={icon} stroke="url(#fig3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <defs>
+                    <linearGradient id="fig3" x1="1" y1="1" x2="23" y2="23" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#79d4c8"/>
+                      <stop offset="1" stop-color="#4ab8a8"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <h3>{title}</h3>
+              <p>{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================
+         CTA
+    ====================================== -->
+    <section class="section page-cta">
+      <div class="container">
+        <div class="page-cta__inner" data-anim>
+          <span class="section-label">Contact</span>
+          <h2>サービスについて詳しく聞く</h2>
+          <p>
+            どのサービスが貴社に最適かは、ヒアリングの上でご提案します。<br/>
+            まずはお気軽にご相談ください。
+          </p>
+          <a href="/contact" class="btn btn-primary">
+            無料相談を予約する
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .services-main { padding-top: 52px; }
+
+  /* ======================================
+     ページヒーロー
+  ====================================== */
+  .page-hero {
+    position: relative;
+    padding: 6rem 0 4.5rem;
+    overflow: hidden;
+  }
+
+  .page-hero::before { z-index: 1; }
+
+  .page-hero__gradient {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-main);
+    z-index: 0;
+  }
+
+  .page-hero__rings {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .page-hero__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-hero__title {
+    font-family: var(--font-sans);
+    font-size: clamp(2.25rem, 5vw, 3.25rem);
+    margin: 0.6rem 0 0;
+    letter-spacing: 0.04em;
+  }
+
+  .page-hero__divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gradient-gold);
+    margin: 1.1rem 0 1.4rem;
+    opacity: 0.75;
+  }
+
+  .page-hero__desc {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: rgba(200, 220, 255, 0.68);
+    line-height: 1.95;
+    max-width: 520px;
+  }
+
+  /* ======================================
+     サービス詳細共通
+  ====================================== */
+  .service-detail {
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .service-detail--alt {
+    background: var(--color-bg-secondary);
+  }
+
+  .service-detail__header {
+    max-width: 680px;
+    margin-bottom: 3.5rem;
+  }
+
+  .service-detail__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent-light);
+    margin-bottom: 1rem;
+    padding: 0.28rem 0.8rem;
+    border: 1px solid var(--color-accent-border);
+    border-radius: 100px;
+  }
+
+  .service-detail__badge--gold {
+    color: #e8c98a;
+    border-color: rgba(200, 169, 110, 0.35);
+  }
+
+  .service-detail__badge--teal {
+    color: #79d4c8;
+    border-color: rgba(121, 212, 200, 0.35);
+  }
+
+  .service-detail__title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.04em;
+  }
+
+  .service-detail__subtitle {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--color-accent);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-detail__desc {
+    font-family: var(--font-sans);
+    font-size: 0.975rem;
+    color: var(--color-text-muted);
+    line-height: 1.95;
+  }
+
+  /* ======================================
+     機能グリッド
+  ====================================== */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+  }
+
+  .feature-item {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    padding: 1.75rem;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+
+  .feature-item::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 16px;
+    height: 16px;
+    border-top: 1.5px solid var(--color-accent);
+    border-left: 1.5px solid var(--color-accent);
+    opacity: 0.5;
+  }
+
+  .feature-item:hover {
+    border-color: rgba(121, 184, 232, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(11,22,40,0.5);
+  }
+
+  .feature-item__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 2px;
+    background: var(--gradient-accent-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(121, 184, 232, 0.15);
+  }
+
+  .feature-item__icon--gold {
+    background: linear-gradient(135deg, rgba(200,169,110,0.12) 0%, rgba(232,201,138,0.12) 100%);
+    border-color: rgba(200, 169, 110, 0.2);
+  }
+
+  .feature-item__icon--teal {
+    background: linear-gradient(135deg, rgba(121,212,200,0.12) 0%, rgba(74,184,168,0.12) 100%);
+    border-color: rgba(121, 212, 200, 0.2);
+  }
+
+  .feature-item h3 {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.02em;
+  }
+
+  .feature-item p {
+    font-family: var(--font-sans);
+    font-size: 0.84rem;
+    color: var(--color-text-muted);
+    line-height: 1.85;
+  }
+
+  /* ======================================
+     プラットフォームグリッド（2カラム）
+  ====================================== */
+  .platforms-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .platform-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+  }
+
+  .platform-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-gold);
+    opacity: 0.5;
+  }
+
+  .platform-card:hover {
+    border-color: rgba(200, 169, 110, 0.35);
+    transform: translateY(-3px);
+  }
+
+  .platform-card__name {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.04em;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .platform-card__desc {
+    font-family: var(--font-sans);
+    font-size: 0.86rem;
+    color: var(--color-text-muted);
+    line-height: 1.85;
+    margin-bottom: 1.25rem;
+  }
+
+  .platform-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+  }
+
+  .platform-card__tags li {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    padding: 0.22rem 0.6rem;
+    border-radius: 100px;
+    background: rgba(200, 169, 110, 0.1);
+    color: #e8c98a;
+    border: 1px solid rgba(200, 169, 110, 0.2);
+    letter-spacing: 0.03em;
+  }
+
+  /* ======================================
+     フロー
+  ====================================== */
+  .flow-section {
+    margin-top: 3rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 3rem;
+  }
+
+  .flow-title {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin-bottom: 2rem;
+    color: var(--color-text-muted);
+  }
+
+  .flow-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .flow-steps::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: calc(12.5% + 10px);
+    right: calc(12.5% + 10px);
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-accent), rgba(121,184,232,0.3));
+    opacity: 0.35;
+  }
+
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .flow-step__num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gradient-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .flow-step__num--gold {
+    background: var(--gradient-gold);
+    color: #2c1a00;
+  }
+
+  .flow-step__body h4 {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.03em;
+  }
+
+  .flow-step__body p {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  /* ======================================
+     CTA
+  ====================================== */
+  .page-cta__inner {
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .page-cta__inner h2 {
+    font-family: var(--font-sans);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 0.75rem 0 1.25rem;
+    letter-spacing: 0.04em;
+  }
+
+  .page-cta__inner p {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 2;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ======================================
+     レスポンシブ
+  ====================================== */
+  @media (max-width: 900px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .platforms-grid { grid-template-columns: 1fr; }
+    .flow-steps { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .flow-steps::before { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .features-grid, .flow-steps { grid-template-columns: 1fr; }
+    .flow-step { flex-direction: row; text-align: left; }
+  }
+</style>

@@ -1,0 +1,193 @@
+---
+const year = new Date().getFullYear();
+
+const navLinks = [
+  { href: '/',         label: 'トップ' },
+  { href: '/services', label: 'サービス' },
+  { href: '/contact',  label: 'お問い合わせ' },
+  { href: 'https://4am.framer.website/', label: '運営会社', external: true },
+];
+---
+
+<footer class="footer">
+  <div class="footer__topline" aria-hidden="true"></div>
+
+  <div class="container footer__inner">
+    <!-- Logo -->
+    <div class="footer__brand">
+      <a href="/" class="footer__logo" aria-label="言霊.studio トップへ">
+        <img
+          src="/logo-hero.png"
+          alt="言霊.studio"
+          height="60"
+          style="mix-blend-mode: screen; display: block; width: auto; max-width: 220px;"
+        />
+      </a>
+    </div>
+
+    <!-- Sitemap -->
+    <nav class="footer__nav" aria-label="フッターナビゲーション">
+      <h3 class="footer__nav-title">Sitemap</h3>
+      <ul>
+        {navLinks.map(({ href, label, external }) => (
+          <li>
+            <a
+              href={href}
+              class="footer__link"
+              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              {label}
+              {external && (
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true" style="opacity:0.5;margin-left:3px;">
+                  <path d="M10 2L2 10M10 2H5M10 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- X (Twitter) -->
+    <div class="footer__social">
+      <h3 class="footer__nav-title">SNS</h3>
+      <a
+        href="https://x.com/not_A_but_Also"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="social-link"
+        aria-label="X (Twitter)"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        <span>@not_A_but_Also</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <p class="footer__copy">&copy; {year} 言霊.studio</p>
+      <p class="footer__credit">powered by 4AM</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-bg-deep);
+  }
+
+  .footer__topline {
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(121, 184, 232, 0.4) 30%,
+      rgba(200, 169, 110, 0.5) 50%,
+      rgba(121, 184, 232, 0.4) 70%,
+      transparent 100%);
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    padding: 4rem 1.5rem 3rem;
+    align-items: start;
+  }
+
+  .footer__logo {
+    display: inline-block;
+  }
+
+  .footer__nav-title {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer__nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer__link {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    transition: color 0.2s;
+  }
+  .footer__link:hover { color: var(--color-text); }
+
+  .footer__social {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    width: fit-content;
+  }
+  .social-link:hover {
+    color: var(--color-accent-light);
+    border-color: var(--color-accent-border);
+    background: var(--color-accent-soft);
+  }
+
+  .footer__bottom {
+    border-top: 1px solid var(--color-border-light);
+    padding: 1.1rem 0;
+  }
+
+  .footer__bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer__copy {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--color-text-subtle);
+    letter-spacing: 0.02em;
+  }
+
+  .footer__credit {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--color-text-subtle);
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding: 3rem 1.5rem 2rem;
+    }
+    .footer__bottom-inner {
+      flex-direction: column;
+      gap: 0.4rem;
+      text-align: center;
+    }
+  }
+</style>

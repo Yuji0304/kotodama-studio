@@ -1,0 +1,277 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = '言霊.studio（コトダマスタジオ）は、ポッドキャスト運用とデジタルオーディオ広告を手がける専門エージェンシーです。企業・行政の音声メディア展開をワンストップでサポートします。',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url"         content={canonicalURL} />
+    <meta property="og:site_name"   content="言霊.studio" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style is:global>
+      /* =============================================
+         Design Tokens
+      ============================================= */
+      :root {
+        /* 藍色ベース */
+        --aiz-900: #0b1628;
+        --aiz-800: #132240;
+        --aiz-700: #1a2f56;
+        --aiz-600: #243c6e;
+        --aiz-500: #2c4a7c;
+        --aiz-400: #3b5998;
+        --aiz-300: #5b7fbe;
+
+        --color-bg:           var(--aiz-700);
+        --color-bg-deep:      var(--aiz-900);
+        --color-bg-secondary: var(--aiz-800);
+        --color-bg-card:      rgba(255,255,255,0.055);
+        --color-border:       rgba(255,255,255,0.11);
+        --color-border-light: rgba(255,255,255,0.06);
+
+        --color-text:         #f0f5ff;
+        --color-text-muted:   rgba(200,220,255,0.62);
+        --color-text-subtle:  rgba(170,200,255,0.38);
+
+        --color-accent:        #79b8e8;
+        --color-accent-light:  #aad4f5;
+        --color-accent-soft:   rgba(121,184,232,0.14);
+        --color-accent-border: rgba(121,184,232,0.28);
+
+        --gradient-hero:    linear-gradient(160deg, var(--aiz-900) 0%, var(--aiz-700) 60%, var(--aiz-500) 100%);
+        --gradient-main:    linear-gradient(160deg, var(--aiz-900) 0%, var(--aiz-700) 40%, var(--aiz-600) 100%);
+        --gradient-accent:  linear-gradient(135deg, #4a8ec8 0%, #79b8e8 100%);
+        --gradient-gold:    linear-gradient(135deg, #c8a96e 0%, #e8c98a 100%);
+        --gradient-accent-subtle: linear-gradient(135deg, rgba(74,142,200,0.18) 0%, rgba(121,184,232,0.18) 100%);
+
+        --font-sans:  'Noto Sans JP', sans-serif;
+      }
+
+      /* =============================================
+         Reset
+      ============================================= */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html  { scroll-behavior: smooth; }
+      body  {
+        font-family: var(--font-sans);
+        background: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.8;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); line-height: 1.3; font-weight: 700; }
+      a                { color: inherit; text-decoration: none; }
+      img              { max-width: 100%; height: auto; display: block; }
+
+      /* =============================================
+         Layout
+      ============================================= */
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+      .section { padding: clamp(7.5rem, 10vw, 10rem) 0; }
+
+      /* =============================================
+         和紙テクスチャ
+      ============================================= */
+      .washi::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+        background-size: 22px 22px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* =============================================
+         共通 UI
+      ============================================= */
+      .section-eyebrow {
+        display: block;
+        font-family: var(--font-sans);
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--color-accent-light);
+        margin-bottom: 0.6rem;
+      }
+
+      .section-number {
+        display: block;
+        font-family: var(--font-sans);
+        font-size: 0.68rem;
+        font-weight: 400;
+        letter-spacing: 0.2em;
+        color: rgba(170,200,255,0.45);
+        margin-bottom: 0.3rem;
+      }
+
+      .section-label {
+        display: inline-block;
+        font-family: var(--font-sans);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--color-accent-light);
+        margin-bottom: 0.9rem;
+        padding: 0.26rem 0.75rem;
+        border: 1px solid var(--color-accent-border);
+        border-radius: 100px;
+      }
+
+      .section-title {
+        font-size: clamp(1.75rem, 4vw, 2.4rem);
+        margin-bottom: 1rem;
+        letter-spacing: 0.02em;
+      }
+
+      .section-desc {
+        font-size: 0.975rem;
+        color: var(--color-text-muted);
+        max-width: 600px;
+        line-height: 1.95;
+      }
+
+      /* 金の区切り線 */
+      .divider {
+        width: 36px;
+        height: 1px;
+        background: var(--gradient-gold);
+        margin: 1rem 0 1.8rem;
+        opacity: 0.7;
+      }
+
+      /* =============================================
+         Buttons
+      ============================================= */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.85rem 2rem;
+        border-radius: 3px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        font-family: var(--font-sans);
+        cursor: pointer;
+        transition: all 0.25s ease;
+        border: none;
+        letter-spacing: 0.04em;
+      }
+      .btn-primary {
+        background: var(--gradient-accent);
+        color: #fff;
+        box-shadow: 0 2px 16px rgba(74,142,200,0.25);
+      }
+      .btn-primary:hover {
+        opacity: 0.88;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(74,142,200,0.38);
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--color-accent-light);
+        border: 1px solid var(--color-accent-border);
+      }
+      .btn-outline:hover {
+        background: var(--color-accent-soft);
+        border-color: var(--color-accent);
+      }
+
+      /* =============================================
+         Scroll Animations (Intersection Observer)
+      ============================================= */
+      [data-anim] {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      [data-anim].in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      [data-anim][data-delay="1"] { transition-delay: 0.1s; }
+      [data-anim][data-delay="2"] { transition-delay: 0.2s; }
+      [data-anim][data-delay="3"] { transition-delay: 0.35s; }
+      [data-anim][data-delay="4"] { transition-delay: 0.5s; }
+      [data-anim][data-delay="5"] { transition-delay: 0.65s; }
+
+      /* =============================================
+         Animations
+      ============================================= */
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0);    }
+      }
+      .fade-up { animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) forwards; }
+      .fade-up-delay-1 { animation-delay: 0.1s;  opacity: 0; }
+      .fade-up-delay-2 { animation-delay: 0.22s; opacity: 0; }
+      .fade-up-delay-3 { animation-delay: 0.38s; opacity: 0; }
+      .fade-up-delay-4 { animation-delay: 0.55s; opacity: 0; }
+      .fade-up-delay-5 { animation-delay: 0.72s; opacity: 0; }
+
+      /* 装飾リング */
+      .deco-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 1px solid rgba(121,184,232,0.1);
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Intersection Observer for scroll animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('[data-anim]').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

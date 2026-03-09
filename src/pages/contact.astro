@@ -1,0 +1,619 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<Layout
+  title="お問い合わせ | 言霊.studio"
+  description="言霊.studioへのお問い合わせはこちら。ポッドキャスト運用・デジタルオーディオ広告に関するご相談・お見積もりをお気軽にどうぞ。"
+>
+  <Header />
+
+  <main class="contact-main">
+
+    <!-- ======================================
+         ページヒーロー
+    ====================================== -->
+    <section class="page-hero washi">
+      <div class="page-hero__gradient" aria-hidden="true"></div>
+      <div class="page-hero__rings" aria-hidden="true">
+        <span class="deco-ring" style="width:500px;height:500px;bottom:-100px;left:-100px;position:absolute;"></span>
+      </div>
+      <div class="container page-hero__content">
+        <span class="section-label fade-up fade-up-delay-1">Contact</span>
+        <h1 class="page-hero__title fade-up fade-up-delay-2">お問い合わせ</h1>
+        <div class="page-hero__divider fade-up fade-up-delay-2" aria-hidden="true"></div>
+        <p class="page-hero__desc fade-up fade-up-delay-3">
+          ポッドキャスト運用・デジタルオーディオ広告に関するご相談・お見積もりはお気軽にどうぞ。<br/>
+          担当者より2営業日以内にご連絡いたします。
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================
+         コンタクトレイアウト
+    ====================================== -->
+    <section class="section contact-section">
+      <div class="container contact-layout">
+
+        <!-- フォーム -->
+        <div class="contact-form-wrap" data-anim>
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/YOUR_FORM_ID"
+            method="POST"
+            id="contact-form"
+            novalidate
+          >
+            <div class="form-group">
+              <label for="company" class="form-label">
+                会社名・団体名 <span class="required">必須</span>
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                class="form-input"
+                placeholder="株式会社〇〇"
+                required
+                autocomplete="organization"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="name" class="form-label">
+                担当者名 <span class="required">必須</span>
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-input"
+                placeholder="山田 太郎"
+                required
+                autocomplete="name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">
+                メールアドレス <span class="required">必須</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                placeholder="taro.yamada@example.com"
+                required
+                autocomplete="email"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone" class="form-label">
+                電話番号 <span class="optional">任意</span>
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="form-input"
+                placeholder="03-0000-0000"
+                autocomplete="tel"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">ご関心のあるサービス</label>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="service[]" value="podcast" />
+                  <span class="checkbox-custom"></span>
+                  ポッドキャスト運用
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="service[]" value="audio-ads" />
+                  <span class="checkbox-custom"></span>
+                  デジタルオーディオ広告
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="service[]" value="branding" />
+                  <span class="checkbox-custom"></span>
+                  ブランディング伴走支援
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="service[]" value="other" />
+                  <span class="checkbox-custom"></span>
+                  その他・未定
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">
+                お問い合わせ内容 <span class="required">必須</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-input form-textarea"
+                placeholder="ご相談内容・ご要望をご記入ください。&#10;&#10;例: ポッドキャスト番組の立ち上げを検討しています。月次の運用サポートについて詳しく教えていただけますか？"
+                required
+                rows="7"
+              ></textarea>
+            </div>
+
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="_subject" value="【言霊.studio】お問い合わせがありました" />
+            <input type="hidden" name="_next" value="https://kotodama.studio/contact?sent=true" />
+
+            <p class="form-notice">
+              送信いただいた個人情報は、お問い合わせ対応の目的にのみ使用し、第三者への提供は行いません。
+            </p>
+
+            <button type="submit" class="btn btn-primary form-submit">
+              送信する
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </form>
+
+          <!-- 送信完了メッセージ -->
+          <div class="form-success" id="form-success" hidden>
+            <div class="form-success__icon" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="url(#scg)" stroke-width="1.5"/>
+                <path d="M8 12l3 3 5-5" stroke="url(#scg)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs>
+                  <linearGradient id="scg" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#aad4f5"/>
+                    <stop offset="1" stop-color="#4a8ec8"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <h3>お問い合わせを受け付けました</h3>
+            <p>ご連絡いただきありがとうございます。<br/>2営業日以内に担当者よりご連絡いたします。</p>
+          </div>
+        </div>
+
+        <!-- サイドバー -->
+        <aside class="contact-sidebar" data-anim data-delay="2">
+          <div class="sidebar-card">
+            <h3 class="sidebar-card__title">よくあるご質問</h3>
+            <div class="faq-list">
+              {[
+                {
+                  q: 'どのような企業・団体が対象ですか？',
+                  a: '中小・大企業から行政機関、スタートアップまで幅広く対応しています。ポッドキャストやオーディオ広告に興味をお持ちの法人であれば、まずはお気軽にご相談ください。',
+                },
+                {
+                  q: '費用はどのくらいかかりますか？',
+                  a: 'サービス内容や運用規模によって異なります。ポッドキャスト運用は月額制、広告運用は予算に応じたプランをご用意しています。ヒアリングのうえ、お見積もりをご提案します。',
+                },
+                {
+                  q: '収録機材がなくても大丈夫ですか？',
+                  a: 'はい、機材のない状態からスタートできます。リモート収録のサポートや、機材選定のアドバイスも行っています。',
+                },
+                {
+                  q: 'どのくらいで番組を開始できますか？',
+                  a: 'ご契約から最短4週間で第1話の配信が可能です。企画設計・制作準備期間を経て、スムーズにスタートをサポートします。',
+                },
+              ].map(({ q, a }) => (
+                <details class="faq-item">
+                  <summary class="faq-question">{q}</summary>
+                  <p class="faq-answer">{a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+
+          <div class="sidebar-info">
+            <p class="sidebar-info__label">営業時間</p>
+            <p class="sidebar-info__value">平日 10:00 〜 18:00</p>
+            <p class="sidebar-info__note">土日祝・年末年始を除く</p>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .contact-main { padding-top: 52px; }
+
+  /* ======================================
+     ページヒーロー
+  ====================================== */
+  .page-hero {
+    position: relative;
+    padding: 6rem 0 4.5rem;
+    overflow: hidden;
+  }
+
+  .page-hero::before { z-index: 1; }
+
+  .page-hero__gradient {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-main);
+    z-index: 0;
+  }
+
+  .page-hero__rings {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .page-hero__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-hero__title {
+    font-family: var(--font-sans);
+    font-size: clamp(2.25rem, 5vw, 3.25rem);
+    margin: 0.6rem 0 0;
+    letter-spacing: 0.04em;
+  }
+
+  .page-hero__divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gradient-gold);
+    margin: 1.1rem 0 1.4rem;
+    opacity: 0.75;
+  }
+
+  .page-hero__desc {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: rgba(200, 220, 255, 0.68);
+    line-height: 1.95;
+    max-width: 540px;
+  }
+
+  /* ======================================
+     コンタクトレイアウト
+  ====================================== */
+  .contact-section { padding-bottom: 6rem; }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* ======================================
+     フォーム
+  ====================================== */
+  .contact-form-wrap { min-width: 0; }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-label {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 0.03em;
+  }
+
+  .required {
+    font-size: 0.68rem;
+    color: var(--color-accent-light);
+    padding: 0.12rem 0.45rem;
+    border: 1px solid var(--color-accent-border);
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+
+  .optional {
+    font-size: 0.68rem;
+    color: var(--color-text-subtle);
+    padding: 0.12rem 0.45rem;
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    font-weight: 400;
+  }
+
+  .form-input {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    padding: 0.85rem 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    width: 100%;
+  }
+
+  .form-input::placeholder {
+    color: rgba(170, 200, 255, 0.28);
+    font-family: var(--font-sans);
+  }
+
+  .form-input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(121, 184, 232, 0.12);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 160px;
+    line-height: 1.8;
+  }
+
+  /* チェックボックス */
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .checkbox-item:hover { color: var(--color-text); }
+
+  .checkbox-item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .checkbox-custom {
+    width: 17px;
+    height: 17px;
+    border: 1px solid var(--color-accent-border);
+    border-radius: 2px;
+    background: transparent;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .checkbox-item input:checked + .checkbox-custom {
+    background: var(--gradient-accent);
+    border-color: transparent;
+  }
+
+  .checkbox-item input:checked + .checkbox-custom::after {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 8px;
+    border: 1.5px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
+
+  .form-notice {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-text-subtle);
+    line-height: 1.8;
+    padding: 0.9rem 1rem;
+    border-left: 2px solid rgba(121, 184, 232, 0.25);
+    background: rgba(121, 184, 232, 0.04);
+  }
+
+  .form-submit {
+    align-self: flex-start;
+    min-width: 150px;
+    justify-content: center;
+  }
+
+  /* 送信完了 */
+  .form-success {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    border-top: 1px solid rgba(121, 184, 232, 0.35);
+  }
+
+  .form-success__icon { margin-bottom: 1.5rem; }
+
+  .form-success h3 {
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+
+  .form-success p {
+    font-family: var(--font-sans);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.9;
+  }
+
+  /* ======================================
+     サイドバー
+  ====================================== */
+  .contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: sticky;
+    top: 70px;
+  }
+
+  .sidebar-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    padding: 1.75rem;
+    position: relative;
+  }
+
+  .sidebar-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      var(--color-accent) 0%,
+      rgba(121, 184, 232, 0.2) 100%);
+    opacity: 0.5;
+  }
+
+  .sidebar-card__title {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    letter-spacing: 0.04em;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .faq-item:last-child { border-bottom: none; }
+
+  .faq-question {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--color-text);
+    padding: 0.875rem 0;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    transition: color 0.2s;
+    user-select: none;
+    line-height: 1.5;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+
+  .faq-question::after {
+    content: '+';
+    color: var(--color-accent-light);
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    font-family: var(--font-sans);
+    font-weight: 300;
+  }
+
+  .faq-item[open] .faq-question::after { transform: rotate(45deg); }
+
+  .faq-question:hover { color: var(--color-accent-light); }
+
+  .faq-answer {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    line-height: 1.85;
+    padding-bottom: 1rem;
+  }
+
+  .sidebar-info {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    padding: 1.5rem;
+  }
+
+  .sidebar-info__label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+    margin-bottom: 0.4rem;
+  }
+
+  .sidebar-info__value {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.02em;
+  }
+
+  .sidebar-info__note {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-text-subtle);
+  }
+
+  /* ======================================
+     レスポンシブ
+  ====================================== */
+  @media (max-width: 900px) {
+    .contact-layout { grid-template-columns: 1fr; }
+    .contact-sidebar { position: static; }
+  }
+</style>
+
+<script>
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('sent') === 'true') {
+      const form    = document.getElementById('contact-form');
+      const success = document.getElementById('form-success');
+      if (form)    form.hidden = true;
+      if (success) success.hidden = false;
+    }
+  }
+</script>

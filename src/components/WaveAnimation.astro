@@ -1,0 +1,143 @@
+---
+interface Props {
+  class?: string;
+  opacity?: number;
+}
+const { class: className, opacity = 1 } = Astro.props;
+---
+
+<div class:list={['wave-container', className]} style={`opacity: ${opacity}`}>
+  <svg
+    class="wave-svg"
+    viewBox="0 0 800 160"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <defs>
+      <linearGradient id="wg1" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"   stop-color="#2c5f9e" stop-opacity="0.3"/>
+        <stop offset="40%"  stop-color="#79b8e8" stop-opacity="0.85"/>
+        <stop offset="70%"  stop-color="#aad4f5" stop-opacity="0.95"/>
+        <stop offset="100%" stop-color="#4a8ec8" stop-opacity="0.3"/>
+      </linearGradient>
+      <linearGradient id="wg2" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"   stop-color="#1a3a6a" stop-opacity="0.2"/>
+        <stop offset="50%"  stop-color="#c8a96e" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#1a3a6a" stop-opacity="0.2"/>
+      </linearGradient>
+      <filter id="wglow" x="-20%" y="-50%" width="140%" height="200%">
+        <feGaussianBlur stdDeviation="1.5" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+      </filter>
+    </defs>
+
+    <g class="bars" filter="url(#wglow)">
+      <!-- 39 bars, symmetric bell-curve heights -->
+      <rect x="10"  y="72"  width="7" height="16"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="30"  y="68"  width="7" height="24"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="50"  y="60"  width="7" height="40"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="70"  y="64"  width="7" height="32"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="90"  y="52"  width="7" height="56"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="110" y="58"  width="7" height="44"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="130" y="46"  width="7" height="68"  rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="150" y="50"  width="7" height="60"  rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="170" y="40"  width="7" height="80"  rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="190" y="44"  width="7" height="72"  rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="210" y="36"  width="7" height="88"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="230" y="38"  width="7" height="84"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="250" y="32"  width="7" height="96"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="270" y="34"  width="7" height="92"  rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="290" y="30"  width="7" height="100" rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="310" y="28"  width="7" height="104" rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="330" y="30"  width="7" height="100" rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="350" y="26"  width="7" height="108" rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="370" y="28"  width="7" height="104" rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="390" y="24"  width="7" height="112" rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="410" y="28"  width="7" height="104" rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="430" y="30"  width="7" height="100" rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="450" y="28"  width="7" height="104" rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="470" y="30"  width="7" height="100" rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="490" y="34"  width="7" height="92"  rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="510" y="36"  width="7" height="88"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="530" y="38"  width="7" height="84"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="550" y="44"  width="7" height="72"  rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="570" y="40"  width="7" height="80"  rx="2" fill="url(#wg2)" class="bar"/>
+      <rect x="590" y="50"  width="7" height="60"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="610" y="46"  width="7" height="68"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="630" y="58"  width="7" height="44"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="650" y="52"  width="7" height="56"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="670" y="64"  width="7" height="32"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="690" y="60"  width="7" height="40"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="710" y="68"  width="7" height="24"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="730" y="66"  width="7" height="28"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="750" y="70"  width="7" height="20"  rx="2" fill="url(#wg1)" class="bar"/>
+      <rect x="770" y="72"  width="7" height="16"  rx="2" fill="url(#wg1)" class="bar"/>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .wave-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .wave-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .bar {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: barBreath 3s ease-in-out infinite;
+  }
+
+  @keyframes barBreath {
+    0%, 100% { transform: scaleY(1);    opacity: 0.65; }
+    50%       { transform: scaleY(0.4); opacity: 1;    }
+  }
+
+  /* 位相をずらして波状に */
+  .bar:nth-child(1)  { animation-delay: 0.00s; }
+  .bar:nth-child(2)  { animation-delay: 0.08s; }
+  .bar:nth-child(3)  { animation-delay: 0.16s; }
+  .bar:nth-child(4)  { animation-delay: 0.24s; }
+  .bar:nth-child(5)  { animation-delay: 0.32s; }
+  .bar:nth-child(6)  { animation-delay: 0.40s; }
+  .bar:nth-child(7)  { animation-delay: 0.48s; }
+  .bar:nth-child(8)  { animation-delay: 0.56s; }
+  .bar:nth-child(9)  { animation-delay: 0.64s; }
+  .bar:nth-child(10) { animation-delay: 0.72s; }
+  .bar:nth-child(11) { animation-delay: 0.80s; }
+  .bar:nth-child(12) { animation-delay: 0.88s; }
+  .bar:nth-child(13) { animation-delay: 0.96s; }
+  .bar:nth-child(14) { animation-delay: 1.04s; }
+  .bar:nth-child(15) { animation-delay: 1.12s; }
+  .bar:nth-child(16) { animation-delay: 1.20s; }
+  .bar:nth-child(17) { animation-delay: 1.28s; }
+  .bar:nth-child(18) { animation-delay: 1.36s; }
+  .bar:nth-child(19) { animation-delay: 1.44s; }
+  .bar:nth-child(20) { animation-delay: 1.50s; }
+  .bar:nth-child(21) { animation-delay: 1.44s; }
+  .bar:nth-child(22) { animation-delay: 1.36s; }
+  .bar:nth-child(23) { animation-delay: 1.28s; }
+  .bar:nth-child(24) { animation-delay: 1.20s; }
+  .bar:nth-child(25) { animation-delay: 1.12s; }
+  .bar:nth-child(26) { animation-delay: 1.04s; }
+  .bar:nth-child(27) { animation-delay: 0.96s; }
+  .bar:nth-child(28) { animation-delay: 0.88s; }
+  .bar:nth-child(29) { animation-delay: 0.80s; }
+  .bar:nth-child(30) { animation-delay: 0.72s; }
+  .bar:nth-child(31) { animation-delay: 0.64s; }
+  .bar:nth-child(32) { animation-delay: 0.56s; }
+  .bar:nth-child(33) { animation-delay: 0.48s; }
+  .bar:nth-child(34) { animation-delay: 0.40s; }
+  .bar:nth-child(35) { animation-delay: 0.32s; }
+  .bar:nth-child(36) { animation-delay: 0.24s; }
+  .bar:nth-child(37) { animation-delay: 0.16s; }
+  .bar:nth-child(38) { animation-delay: 0.08s; }
+  .bar:nth-child(39) { animation-delay: 0.00s; }
+</style>

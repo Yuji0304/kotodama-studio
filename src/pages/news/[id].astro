@@ -1,0 +1,211 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { client, formatDate } from '@/lib/microcms';
+import type { NewsItem, NewsListResponse } from '@/lib/microcms';
+
+export async function getStaticPaths() {
+  const data = await client.get<NewsListResponse>({
+    endpoint: 'news',
+    queries: { limit: 100, fields: 'id' },
+  });
+  return data.contents.map((item) => ({ params: { id: item.id } }));
+}
+
+const { id } = Astro.params;
+const article = await client.get<NewsItem>({
+  endpoint: 'news',
+  contentId: id,
+});
+---
+
+<Layout
+  title={`${article.title} | 言霊.studio`}
+  description={article.title}
+>
+  <Header />
+
+  <main class="article-main">
+
+    <!-- ページヒーロー -->
+    <section class="page-hero washi">
+      <div class="page-hero__gradient" aria-hidden="true"></div>
+      <div class="container page-hero__content">
+        <div class="article-meta fade-up fade-up-delay-1">
+          <span class="article-date">{formatDate(article.publishedAt)}</span>
+          {article.category && (
+            <span class="article-tag">{article.category}</span>
+          )}
+        </div>
+        <h1 class="article-title fade-up fade-up-delay-2">{article.title}</h1>
+      </div>
+    </section>
+
+    <!-- 本文 -->
+    <section class="section article-section">
+      <div class="container article-layout">
+
+        <div class="article-body" data-anim>
+          <div class="article-content" set:html={article.content} />
+
+          <div class="article-footer">
+            <a href="/news" class="back-link">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              ニュース一覧へ戻る
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .article-main { padding-top: 52px; }
+
+  /* ページヒーロー */
+  .page-hero {
+    position: relative;
+    padding: 5rem 0 4rem;
+    overflow: hidden;
+  }
+  .page-hero::before { z-index: 1; }
+  .page-hero__gradient {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-main);
+    z-index: 0;
+  }
+  .page-hero__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.2rem;
+  }
+  .article-date {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--color-text-subtle);
+    letter-spacing: 0.05em;
+  }
+  .article-tag {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    padding: 0.18rem 0.65rem;
+    border: 1px solid var(--color-accent-border);
+    border-radius: 100px;
+    color: var(--color-accent-light);
+    letter-spacing: 0.04em;
+  }
+  .article-title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    max-width: 720px;
+  }
+
+  /* 本文エリア */
+  .article-section { background: var(--aiz-800); }
+  .article-layout { max-width: 720px; }
+
+  .article-body {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    padding: 3rem;
+  }
+
+  /* リッチエディタ本文スタイル */
+  .article-content {
+    font-family: var(--font-sans);
+    font-size: 0.975rem;
+    color: var(--color-text-muted);
+    line-height: 2;
+  }
+  .article-content :global(h2) {
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+    letter-spacing: 0.03em;
+  }
+  .article-content :global(h3) {
+    font-size: 1.05rem;
+    color: var(--color-text);
+    margin: 2rem 0 0.75rem;
+    letter-spacing: 0.02em;
+  }
+  .article-content :global(p) {
+    margin-bottom: 1.4rem;
+  }
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    margin: 1rem 0 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .article-content :global(li) {
+    line-height: 1.8;
+  }
+  .article-content :global(a) {
+    color: var(--color-accent-light);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .article-content :global(a:hover) {
+    color: var(--color-text);
+  }
+  .article-content :global(strong) {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+  .article-content :global(img) {
+    border-radius: 2px;
+    margin: 1.5rem 0;
+  }
+  .article-content :global(blockquote) {
+    border-left: 3px solid var(--color-accent-border);
+    padding: 0.5rem 1.25rem;
+    margin: 1.5rem 0;
+    color: var(--color-text-subtle);
+    font-style: italic;
+  }
+
+  .article-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    transition: color 0.2s, gap 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .back-link:hover {
+    color: var(--color-accent-light);
+    gap: 0.65rem;
+  }
+
+  @media (max-width: 768px) {
+    .article-body { padding: 1.75rem; }
+  }
+</style>

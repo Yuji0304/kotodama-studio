@@ -1,0 +1,196 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { client, formatDate } from '@/lib/microcms';
+import type { NewsItem } from '@/lib/microcms';
+
+let newsItems: NewsItem[] = [];
+let totalCount = 0;
+try {
+  const data = await client.get<{ contents: NewsItem[]; totalCount: number }>({
+    endpoint: 'news',
+    queries: { limit: 100, orders: '-publishedAt' },
+  });
+  newsItems = data.contents;
+  totalCount = data.totalCount;
+} catch (e) {
+  console.warn('microCMS fetch failed:', e);
+}
+---
+
+<Layout
+  title="ニュース | 言霊.studio"
+  description="言霊.studioのニュース・お知らせ一覧です。"
+>
+  <Header />
+
+  <main class="news-main">
+
+    <!-- ページヒーロー -->
+    <section class="page-hero washi">
+      <div class="page-hero__gradient" aria-hidden="true"></div>
+      <div class="container page-hero__content">
+        <span class="section-label fade-up fade-up-delay-1">News</span>
+        <h1 class="page-hero__title fade-up fade-up-delay-2">ニュース</h1>
+        <div class="page-hero__divider fade-up fade-up-delay-2" aria-hidden="true"></div>
+        <p class="page-hero__desc fade-up fade-up-delay-3">
+          言霊.studio の最新情報・お知らせをお届けします。
+        </p>
+      </div>
+    </section>
+
+    <!-- ニュース一覧 -->
+    <section class="section news-section">
+      <div class="container">
+
+        {newsItems.length === 0 ? (
+          <p class="news-empty">現在ニュースはありません。</p>
+        ) : (
+          <>
+            <p class="news-count" data-anim>{totalCount}件</p>
+            <ul class="news-list" data-anim>
+              {newsItems.map((item) => (
+                <li class="news-item">
+                  <a href={`/news/${item.id}`} class="news-item__inner">
+                    <span class="news-item__date">{formatDate(item.publishedAt)}</span>
+                    {item.category && (
+                      <span class="news-item__tag">{item.category}</span>
+                    )}
+                    <span class="news-item__title">{item.title}</span>
+                    <svg class="news-item__arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .news-main { padding-top: 52px; }
+
+  /* ページヒーロー */
+  .page-hero {
+    position: relative;
+    padding: 6rem 0 4.5rem;
+    overflow: hidden;
+  }
+  .page-hero::before { z-index: 1; }
+  .page-hero__gradient {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-main);
+    z-index: 0;
+  }
+  .page-hero__content {
+    position: relative;
+    z-index: 2;
+  }
+  .page-hero__title {
+    font-family: var(--font-sans);
+    font-size: clamp(2.25rem, 5vw, 3.25rem);
+    margin: 0.6rem 0 0;
+    letter-spacing: 0.04em;
+  }
+  .page-hero__divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gradient-gold);
+    margin: 1.1rem 0 1.4rem;
+    opacity: 0.75;
+  }
+  .page-hero__desc {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: rgba(200, 220, 255, 0.68);
+    line-height: 1.95;
+  }
+
+  /* 一覧 */
+  .news-section { background: var(--aiz-800); }
+
+  .news-count {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--color-text-subtle);
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+  }
+
+  .news-list {
+    list-style: none;
+    border-top: 1px solid var(--color-border);
+  }
+  .news-item { border-bottom: 1px solid var(--color-border); }
+  .news-item__inner {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.4rem 0.5rem;
+    transition: background 0.2s;
+  }
+  .news-item__inner:hover { background: rgba(255,255,255,0.03); }
+
+  .news-item__date {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-text-subtle);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .news-item__tag {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    padding: 0.18rem 0.6rem;
+    border: 1px solid var(--color-accent-border);
+    border-radius: 100px;
+    color: var(--color-accent-light);
+    white-space: nowrap;
+    flex-shrink: 0;
+    letter-spacing: 0.04em;
+  }
+  .news-item__title {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    flex: 1;
+    transition: color 0.2s;
+    line-height: 1.6;
+  }
+  .news-item__inner:hover .news-item__title { color: var(--color-text); }
+
+  .news-item__arrow {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .news-item__inner:hover .news-item__arrow {
+    transform: translateX(3px);
+    opacity: 1;
+  }
+
+  .news-empty {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .news-item__inner { flex-wrap: wrap; gap: 0.5rem; }
+    .news-item__title { width: 100%; }
+    .news-item__arrow { display: none; }
+  }
+</style>

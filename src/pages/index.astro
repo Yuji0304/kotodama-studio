@@ -2,6 +2,19 @@
 import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+import { client, formatDate } from '@/lib/microcms';
+import type { NewsItem } from '@/lib/microcms';
+
+let newsItems: NewsItem[] = [];
+try {
+  const data = await client.get<{ contents: NewsItem[] }>({
+    endpoint: 'news',
+    queries: { limit: 4, orders: '-publishedAt' },
+  });
+  newsItems = data.contents;
+} catch (e) {
+  console.warn('microCMS fetch failed (using empty list):', e);
+}
 ---
 
 <Layout title="言霊.studio | ポッドキャスト運用・オーディオ広告代理店">
@@ -185,51 +198,29 @@ import Footer from '@/components/Footer.astro';
           <div class="divider"></div>
         </div>
 
-        <ul class="news-list">
-          <li class="news-item" data-anim data-delay="1">
-            <a href="#" class="news-item__inner">
-              <span class="news-item__date">2025.03.01</span>
-              <span class="news-item__tag">お知らせ</span>
-              <span class="news-item__title">言霊.studioがオフィシャルサイトをリニューアルしました</span>
-              <svg class="news-item__arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          </li>
-          <li class="news-item" data-anim data-delay="2">
-            <a href="#" class="news-item__inner">
-              <span class="news-item__date">2025.02.15</span>
-              <span class="news-item__tag">サービス</span>
-              <span class="news-item__title">ブランディング伴走支援サービスの提供を開始しました</span>
-              <svg class="news-item__arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          </li>
-          <li class="news-item" data-anim data-delay="3">
-            <a href="#" class="news-item__inner">
-              <span class="news-item__date">2025.01.20</span>
-              <span class="news-item__tag">メディア</span>
-              <span class="news-item__title">デジタルオーディオ広告の効果測定レポートを公開しました</span>
-              <svg class="news-item__arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          </li>
-          <li class="news-item" data-anim data-delay="4">
-            <a href="#" class="news-item__inner">
-              <span class="news-item__date">2024.12.10</span>
-              <span class="news-item__tag">実績</span>
-              <span class="news-item__title">2024年の音声メディア運用実績レポートを公開しました</span>
-              <svg class="news-item__arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          </li>
-        </ul>
+        {newsItems.length === 0 ? (
+          <p class="news-empty">現在ニュースはありません。</p>
+        ) : (
+          <ul class="news-list">
+            {newsItems.map((item, i) => (
+              <li class="news-item" data-anim data-delay={String(i + 1)}>
+                <a href={`/news/${item.id}`} class="news-item__inner">
+                  <span class="news-item__date">{formatDate(item.publishedAt)}</span>
+                  {item.category && (
+                    <span class="news-item__tag">{item.category}</span>
+                  )}
+                  <span class="news-item__title">{item.title}</span>
+                  <svg class="news-item__arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
 
         <div class="news-footer" data-anim>
-          <a href="#" class="btn btn-outline news-viewall">
+          <a href="/news" class="btn btn-outline news-viewall">
             VIEW ALL
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -586,6 +577,14 @@ import Footer from '@/components/Footer.astro';
   .news-item__inner:hover .news-item__arrow {
     transform: translateX(3px);
     opacity: 1;
+  }
+
+  .news-empty {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    padding: 2rem 0;
+    text-align: center;
   }
 
   .news-footer { text-align: center; }

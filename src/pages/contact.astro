@@ -463,10 +463,15 @@ import Footer from '@/components/Footer.astro';
 
   /* ローディングアニメーション */
   .btn-loading {
-    display: inline-flex;
+    display: none;
     align-items: center;
     gap: 0.5rem;
   }
+  .btn-loading.is-visible {
+    display: inline-flex;
+  }
+  /* hidden属性をCSS displayが上書きしないよう保証 */
+  .btn-loading[hidden] { display: none !important; }
   @keyframes spin {
     to { transform: rotate(360deg); }
   }
@@ -664,7 +669,7 @@ import Footer from '@/components/Footer.astro';
     if (submitBtn) submitBtn.disabled = true;
     if (btnLabel)   btnLabel.hidden = true;
     if (btnArrow)   btnArrow.hidden = true;
-    if (btnLoading) btnLoading.hidden = false;
+    if (btnLoading) btnLoading.classList.add('is-visible');
     if (errorMsg)   errorMsg.hidden = true;
 
     try {
@@ -694,7 +699,7 @@ import Footer from '@/components/Footer.astro';
       if (submitBtn) submitBtn.disabled = false;
       if (btnLabel)   btnLabel.hidden = false;
       if (btnArrow)   btnArrow.hidden = false;
-      if (btnLoading) btnLoading.hidden = true;
+      if (btnLoading) btnLoading.classList.remove('is-visible');
     }
   });
 </script>

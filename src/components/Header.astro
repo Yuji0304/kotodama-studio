@@ -74,11 +74,11 @@ const currentPath = Astro.url.pathname;
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    transition: background 0.4s ease, border-bottom 0.4s ease;
+    transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
     border-bottom: 1px solid transparent;
   }
 
-  /* 透明状態（インディゴヒーロー上） */
+  /* 透明状態（ヒーロー上） */
   .header:not(.scrolled) {
     background: transparent;
   }
@@ -89,13 +89,16 @@ const currentPath = Astro.url.pathname;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom-color: rgba(255,255,255,0.09);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04);
   }
 
   .header__inner {
     display: flex;
     align-items: center;
-    padding: 10px 0;
+    padding: 12px 0;
     gap: 2rem;
+    min-height: 52px;
+    box-sizing: border-box;
   }
 
   .header__logo {

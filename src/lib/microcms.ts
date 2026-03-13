@@ -5,13 +5,22 @@ export const client = createClient({
   apiKey: import.meta.env.MICROCMS_API_KEY,
 });
 
+/** microCMS のカテゴリはテキスト型の場合は string、関連コンテンツ型の場合はオブジェクト */
+export type MicroCMSCategory = string | { id: string; name: string };
+
+export function getCategoryName(category: MicroCMSCategory | undefined): string | undefined {
+  if (!category) return undefined;
+  if (typeof category === 'string') return category;
+  return category.name;
+}
+
 export type NewsItem = {
   id: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
   title: string;
-  category: string;
+  category?: MicroCMSCategory;
   content: string;
 };
 

@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
-import { client, formatDate } from '@/lib/microcms';
+import { client, formatDate, getCategoryName } from '@/lib/microcms';
 import type { NewsItem, NewsListResponse } from '@/lib/microcms';
 
 export async function getStaticPaths() {
@@ -34,8 +34,8 @@ const article = await client.get<NewsItem>({
       <div class="container page-hero__content">
         <div class="article-meta fade-up fade-up-delay-1">
           <span class="article-date">{formatDate(article.publishedAt)}</span>
-          {article.category && (
-            <span class="article-tag">{article.category}</span>
+          {getCategoryName(article.category) && (
+            <span class="article-tag">{getCategoryName(article.category)}</span>
           )}
         </div>
         <h1 class="article-title fade-up fade-up-delay-2">{article.title}</h1>

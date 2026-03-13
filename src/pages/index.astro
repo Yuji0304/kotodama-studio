@@ -2,7 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
-import { client, formatDate } from '@/lib/microcms';
+import { client, formatDate, getCategoryName } from '@/lib/microcms';
 import type { NewsItem } from '@/lib/microcms';
 
 let newsItems: NewsItem[] = [];
@@ -206,8 +206,8 @@ try {
               <li class="news-item" data-anim data-delay={String(i + 1)}>
                 <a href={`/news/${item.id}`} class="news-item__inner">
                   <span class="news-item__date">{formatDate(item.publishedAt)}</span>
-                  {item.category && (
-                    <span class="news-item__tag">{item.category}</span>
+                  {getCategoryName(item.category) && (
+                    <span class="news-item__tag">{getCategoryName(item.category)}</span>
                   )}
                   <span class="news-item__title">{item.title}</span>
                   <svg class="news-item__arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">

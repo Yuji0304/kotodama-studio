@@ -41,8 +41,6 @@ import Footer from '@/components/Footer.astro';
         <div class="contact-form-wrap" data-anim>
           <form
             class="contact-form"
-            action="https://formspree.io/f/YOUR_FORM_ID"
-            method="POST"
             id="contact-form"
             novalidate
           >
@@ -145,19 +143,25 @@ import Footer from '@/components/Footer.astro';
               ></textarea>
             </div>
 
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-            <input type="hidden" name="_subject" value="【言霊.studio】お問い合わせがありました" />
-            <input type="hidden" name="_next" value="https://kotodama.studio/contact?sent=true" />
-
             <p class="form-notice">
               送信いただいた個人情報は、お問い合わせ対応の目的にのみ使用し、第三者への提供は行いません。
             </p>
 
-            <button type="submit" class="btn btn-primary form-submit">
-              送信する
-              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <div id="form-error" class="form-error-msg" hidden>
+              送信中にエラーが発生しました。お手数ですが、時間をおいて再度お試しください。
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit" id="form-submit-btn">
+              <span class="btn-label">送信する</span>
+              <svg class="btn-arrow" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
+              <span class="btn-loading" hidden aria-hidden="true">
+                <svg class="spin" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="40 20" stroke-linecap="round"/>
+                </svg>
+                送信中…
+              </span>
             </button>
           </form>
 
@@ -445,6 +449,29 @@ import Footer from '@/components/Footer.astro';
     justify-content: center;
   }
 
+  /* エラーメッセージ */
+  .form-error-msg {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.25);
+    border-radius: 2px;
+    padding: 0.85rem 1rem;
+    line-height: 1.6;
+  }
+
+  /* ローディングアニメーション */
+  .btn-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .spin { animation: spin 0.8s linear infinite; }
+
   /* 送信完了 */
   .form-success {
     text-align: center;
@@ -607,13 +634,67 @@ import Footer from '@/components/Footer.astro';
 </style>
 
 <script>
-  if (typeof window !== 'undefined') {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('sent') === 'true') {
-      const form    = document.getElementById('contact-form');
-      const success = document.getElementById('form-success');
-      if (form)    form.hidden = true;
-      if (success) success.hidden = false;
+  const form      = document.getElementById('contact-form') as HTMLFormElement | null;
+  const submitBtn = document.getElementById('form-submit-btn') as HTMLButtonElement | null;
+  const success   = document.getElementById('form-success') as HTMLElement | null;
+  const errorMsg  = document.getElementById('form-error') as HTMLElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Get form values
+    const company = (form.querySelector('#company') as HTMLInputElement).value.trim();
+    const name    = (form.querySelector('#name') as HTMLInputElement).value.trim();
+    const email   = (form.querySelector('#email') as HTMLInputElement).value.trim();
+    const message = (form.querySelector('#message') as HTMLTextAreaElement).value.trim();
+    const phone   = (form.querySelector('#phone') as HTMLInputElement).value.trim();
+    const serviceCheckboxes = form.querySelectorAll<HTMLInputElement>('input[name="service[]"]:checked');
+    const services = Array.from(serviceCheckboxes).map(cb => cb.value).join(', ');
+
+    // Client-side validation
+    if (!company || !name || !email || !message) {
+      errorMsg && (errorMsg.textContent = '必須項目をすべてご入力ください。', errorMsg.hidden = false);
+      return;
     }
-  }
+
+    // Show loading
+    const btnLabel   = submitBtn?.querySelector('.btn-label') as HTMLElement | null;
+    const btnArrow   = submitBtn?.querySelector('.btn-arrow') as HTMLElement | null;
+    const btnLoading = submitBtn?.querySelector('.btn-loading') as HTMLElement | null;
+    if (submitBtn) submitBtn.disabled = true;
+    if (btnLabel)   btnLabel.hidden = true;
+    if (btnArrow)   btnArrow.hidden = true;
+    if (btnLoading) btnLoading.hidden = false;
+    if (errorMsg)   errorMsg.hidden = true;
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ company, name, email, message, phone, services }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || '送信に失敗しました');
+      }
+
+      // Success
+      form.hidden = true;
+      if (success) success.hidden = false;
+
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : '送信中にエラーが発生しました';
+      if (errorMsg) {
+        errorMsg.textContent = msg;
+        errorMsg.hidden = false;
+      }
+      // Restore button
+      if (submitBtn) submitBtn.disabled = false;
+      if (btnLabel)   btnLabel.hidden = false;
+      if (btnArrow)   btnArrow.hidden = false;
+      if (btnLoading) btnLoading.hidden = true;
+    }
+  });
 </script>

@@ -81,9 +81,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       ============================================= */
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       html  { scroll-behavior: smooth; }
+      html {
+        min-height: 100%;
+      }
       body  {
         font-family: var(--font-sans);
-        background: var(--color-bg);
+        background: linear-gradient(to bottom, var(--aiz-900) 0%, var(--aiz-700) 45%, var(--aiz-800) 100%);
+        background-attachment: fixed;
+        min-height: 100vh;
         color: var(--color-text);
         line-height: 1.8;
         -webkit-font-smoothing: antialiased;
